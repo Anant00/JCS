@@ -7,6 +7,7 @@ buildscript {
     ext.rxjava = "2.2.13"
     ext.rxandroid = "2.1.1"
     ext.rxadapter = "2.6.2"
+    ext.okhttp = "4.2.2"
 
     repositories {
         google()
