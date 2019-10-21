@@ -43,6 +43,12 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjava"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rxadapter"
 
+    //http
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
+
+    //RxKotlin
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
