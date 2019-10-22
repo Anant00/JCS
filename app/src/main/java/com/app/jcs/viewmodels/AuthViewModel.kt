@@ -18,22 +18,23 @@ class AuthViewModel(
         javaClass.simpleName
     }
 
-    fun getData() {
-        disposable.add(api.getAdmissionFee("1")
-            .toObservable()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onNext = {
-                    getDataOnNext(it)
-                },
-                onError = {
-                    getDataOnError(it)
-                },
-                onComplete = {
-                    getDataOnComplete()
-                }
-            )
+    fun loginUser() {
+        disposable.add(
+            api.login("JCS-PR-0001", "password")
+                .toObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onNext = {
+                        Log.d(tag, "parent name: ${it.motherName}")
+                    },
+                    onError = {
+                        getDataOnError(it)
+                    },
+                    onComplete = {
+                        getDataOnComplete()
+                    }
+                )
         )
     }
 
