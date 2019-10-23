@@ -5,6 +5,8 @@ import com.app.jcs.api.retrofitBuilder.RetrofitBuilder.provideRetrofitInstance
 import com.app.jcs.di.providers.ModuleProviders.provideAuthViewModules
 import com.app.jcs.di.providers.ModuleProviders.provideCompositeDisposable
 import com.app.jcs.di.providers.ModuleProviders.provideLoginRepo
+import com.app.jcs.di.providers.ModuleProviders.provideMainRepo
+import com.app.jcs.di.providers.ModuleProviders.provideMainViewModel
 import com.app.jcs.di.providers.ModuleProviders.provideSessionManager
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -19,4 +21,8 @@ var authViewModule = module {
     single { provideSessionManager() }
     single { provideLoginRepo(get(), get()) }
     viewModel { provideAuthViewModules(get(), get()) }
+}
+var mainViewModule = module {
+    single { provideMainRepo(get()) }
+    viewModel { provideMainViewModel(get(), get()) }
 }

@@ -26,7 +26,7 @@ interface Api {
     @POST("includes/StudentViewForParent.php")
     fun getStudentDetail(
         @Field("parent_id") parentId: String
-    ): Single<List<StudentDetail>>
+    ): Flowable<List<StudentDetail>>
 
     @FormUrlEncoded
     @POST("includes/getFees.php")

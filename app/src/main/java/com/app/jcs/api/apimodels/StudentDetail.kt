@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 class StudentDetail {
 
     @field:Json(name = "id")
-    val id: Int? = null
+    var id: Int? = null
     @field:Json(name = "name")
-    val name: String? = null
+    var name: String? = null
 }

@@ -2,6 +2,7 @@ package com.app.jcs.application
 
 import android.app.Application
 import com.app.jcs.di.modules.authViewModule
+import com.app.jcs.di.modules.mainViewModule
 import com.app.jcs.di.modules.retrofitModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -14,7 +15,7 @@ class App : Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(listOf(retrofitModule, authViewModule))
+            modules(listOf(retrofitModule, authViewModule, mainViewModule))
         }
     }
 }
