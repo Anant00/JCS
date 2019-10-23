@@ -11,13 +11,13 @@ import com.app.jcs.api.apimodels.ParentLogin
 import com.app.jcs.view.activities.main.MainActivity
 import com.app.jcs.viewmodels.AuthViewModel
 import kotlinx.android.synthetic.main.activity_auth.*
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AuthActivity : AppCompatActivity() {
     private val tag by lazy {
         javaClass.simpleName
     }
-    private val authViewModel: AuthViewModel by inject()
+    private val authViewModel: AuthViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
