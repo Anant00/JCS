@@ -2,14 +2,14 @@ package com.app.jcs.api.apiservice
 
 import com.app.jcs.api.apimodels.AdmissionFee
 import com.app.jcs.api.apimodels.ParentLogin
-import io.reactivex.Flowable
+import com.app.jcs.api.apimodels.StudentDetail
 import io.reactivex.Single
 import retrofit2.http.*
 
 interface Api {
 
     @GET("includes/admissionFee.php")
-    fun getAdmissionFee(@Query("student_id") studentId: String): Flowable<List<AdmissionFee>>
+    fun getAdmissionFee(@Query("student_id") studentId: String): Single<List<AdmissionFee>>
 
     @FormUrlEncoded
     @POST("v1/ParentsLogin.php")
@@ -17,4 +17,17 @@ interface Api {
         @Field("username") username: String,
         @Field("password") password: String
     ): Single<ParentLogin>
+
+    @FormUrlEncoded
+    @POST("includes/StudentViewForParent.php")
+    fun getStudentDetail(
+        @Field("parent_id") parentId: String
+    ): Single<List<StudentDetail>>
+
+
+    @FormUrlEncoded
+    @POST("includes/getFees.php")
+    fun getFees(
+        @Field("class_id") classId: String
+    ): Single<List<StudentDetail>>
 }

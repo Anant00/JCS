@@ -2,7 +2,6 @@ package com.app.jcs.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.app.jcs.api.apimodels.AdmissionFee
 import com.app.jcs.api.apiservice.Api
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -21,12 +20,18 @@ class AuthViewModel(
     fun loginUser() {
         disposable.add(
             api.login("JCS-PR-0001", "password")
-                .toObservable()
                 .subscribeOn(Schedulers.io())
+                .flatMap { result ->
+                    api.getStudentDetail(result.id.toString())
+                }
+                .flatMap {
+                    api.getAdmissionFee(it[0].id.toString())
+                }
+                .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {
-                        Log.d(tag, "parent name: ${it.motherName}")
+                        Log.d(tag, "parent name: ${it[0].studentId}")
                     },
                     onError = {
                         getDataOnError(it)
@@ -44,9 +49,5 @@ class AuthViewModel(
 
     private fun getDataOnError(it: Throwable) {
         Log.d(tag, "onDataError: ${it.localizedMessage}")
-    }
-
-    private fun getDataOnNext(list: List<AdmissionFee>) {
-        Log.d(tag, "onNext: ${list[0].studentId}")
     }
 }
