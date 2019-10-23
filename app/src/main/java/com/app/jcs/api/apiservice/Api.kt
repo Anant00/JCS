@@ -6,13 +6,16 @@ import com.app.jcs.api.apimodels.ParentLogin
 import com.app.jcs.api.apimodels.StudentDetail
 import io.reactivex.Flowable
 import io.reactivex.Single
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
 interface Api {
 
-    @GET("includes/admissionFee.php")
+    @FormUrlEncoded
+    @POST("includes/admissionFee.php")
     fun getAdmissionFee(
-        @Query("student_id") studentId: String
+        @Field("student_id") studentId: String
     ): Single<List<AdmissionFee>>
 
     @FormUrlEncoded

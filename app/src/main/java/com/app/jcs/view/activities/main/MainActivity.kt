@@ -25,7 +25,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun getStudentDetailByParentId(parentId: String) {
         viewModelMain.getStudentDetail(parentId)?.observe(this, Observer {
-            Log.d(tag, "student detail : ${it[0].name} ")
+            getAdmissionFeeByStudentId(it[0].id.toString())
+        })
+    }
+
+    private fun getAdmissionFeeByStudentId(studentId: String) {
+        viewModelMain.getAdmissionFee(studentId)?.observe(this, Observer {
+            Log.d(tag, "fee is: ${it[0].studentId} ")
         })
     }
 }
