@@ -8,4 +8,6 @@ class StudentDetail {
     var id: Int? = null
     @field:Json(name = "name")
     var name: String? = null
+    @field:Json(name = "class")
+    var classId: String? = null
 }

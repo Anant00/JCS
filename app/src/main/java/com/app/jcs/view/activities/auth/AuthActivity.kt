@@ -10,7 +10,7 @@ import com.app.jcs.R
 import com.app.jcs.api.apimodels.ParentLogin
 import com.app.jcs.view.activities.main.MainActivity
 import com.app.jcs.viewmodels.AuthViewModel
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_auth.*
 import org.koin.android.ext.android.inject
 
 class AuthActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_auth)
         loginUser()
         observeState()
     }
