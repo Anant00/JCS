@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.app.jcs.R
+import com.app.jcs.api.apimodels.ParentLogin
 import com.app.jcs.view.activities.main.MainActivity
 import com.app.jcs.viewmodels.AuthViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,7 +43,9 @@ class AuthActivity : AppCompatActivity() {
                     Log.d(tag, "Loading")
                 }
                 AuthResource.AuthStatus.AUTHENTICATED -> {
-                    navigateToMainActivity()
+                    it.data?.let { data ->
+                        navigateToMainActivity(data)
+                    }
                 }
                 AuthResource.AuthStatus.ERROR -> Log.d(tag, "error: ${it.message}")
                 AuthResource.AuthStatus.NOT_AUTHENTICATED -> Log.d(tag, "failed: User logged out")
@@ -51,8 +54,8 @@ class AuthActivity : AppCompatActivity() {
         })
     }
 
-    private fun navigateToMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+    private fun navigateToMainActivity(parentLogin: ParentLogin) {
+        startActivity(Intent(this, MainActivity::class.java).putExtra("data", parentLogin))
         finish()
     }
 
