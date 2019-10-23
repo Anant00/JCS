@@ -2,7 +2,7 @@ package com.app.jcs.di.providers
 
 import com.app.jcs.api.apiservice.Api
 import com.app.jcs.utils.SessionManager
-import com.app.jcs.view.activities.auth.LoginRepo
+import com.app.jcs.view.activities.auth.AuthRepo
 import com.app.jcs.viewmodels.AuthViewModel
 import io.reactivex.disposables.CompositeDisposable
 
@@ -16,14 +16,14 @@ object ModuleProviders {
         return SessionManager()
     }
 
-    fun provideLoginRepo(api: Api, sessionManager: SessionManager): LoginRepo {
-        return LoginRepo(api, sessionManager)
+    fun provideLoginRepo(api: Api, sessionManager: SessionManager): AuthRepo {
+        return AuthRepo(api, sessionManager)
     }
 
     fun provideAuthViewModules(
         sessionManager: SessionManager,
-        loginRepo: LoginRepo
+        authRepo: AuthRepo
     ): AuthViewModel {
-        return AuthViewModel(sessionManager, loginRepo)
+        return AuthViewModel(sessionManager, authRepo)
     }
 }

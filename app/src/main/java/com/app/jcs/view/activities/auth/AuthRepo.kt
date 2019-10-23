@@ -8,7 +8,7 @@ import com.app.jcs.utils.SessionManager
 import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 
-class LoginRepo(var api: Api, var sessionManager: SessionManager) {
+class AuthRepo(var api: Api, var sessionManager: SessionManager) {
     private val tag by lazy {
         javaClass.simpleName
     }
