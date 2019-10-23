@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">JCS</string>
+    <string name="parent_id">Parent Id</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
 </resources>

@@ -17,21 +17,18 @@ class AuthViewModel(
         javaClass.simpleName
     }
 
-    fun loginUser() {
+    fun loginUser(username: String, password: String) {
         disposable.add(
-            api.login("JCS-PR-0001", "password")
+            api.login(username, password)
                 .subscribeOn(Schedulers.io())
                 .flatMap { result ->
                     api.getStudentDetail(result.id.toString())
-                }
-                .flatMap {
-                    api.getAdmissionFee(it[0].id.toString())
                 }
                 .toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {
-                        Log.d(tag, "parent name: ${it[0].studentId}")
+                        Log.d(tag, "parent name: ${it[0].id}")
                     },
                     onError = {
                         getDataOnError(it)
