@@ -3,4 +3,6 @@
     <string name="parent_id">Parent Id</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
+    <string name="default_username">JCS-PR-0001</string>
+    <string name="default_password">password</string>
 </resources>

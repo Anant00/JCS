@@ -27,4 +27,10 @@ class MainRepo(private val api: Api) {
             .toObservable()
             .subscribeOn(Schedulers.io())
     }
+
+    fun getAnnualFeeByStudentId(studentId: String): Observable<List<AdmissionFee>> {
+        return api.getAnnualFee(studentId)
+            .toObservable()
+            .subscribeOn(Schedulers.io())
+    }
 }

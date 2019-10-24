@@ -6,13 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.app.jcs.R
 import com.app.jcs.api.apimodels.ParentLogin
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val tag by lazy {
         javaClass.simpleName
     }
-    private val viewModelMain: ViewModelMain by inject()
+    private lateinit var studentId: String
+    private lateinit var classId: String
+    private val viewModelMain: ViewModelMain by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +29,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getStudentDetailByParentId(parentId: String) {
         viewModelMain.getStudentDetail(parentId)?.observe(this, Observer {
-            getAdmissionFeeByStudentId(it[0].id.toString())
-            getFeeByClassId(it[0].classId!!)
+            studentId = "3"
+            classId = it[0].classId.toString()
+            getAdmissionFeeByStudentId(studentId)
+            getFeeByClassId(classId)
+            getAnnualFee(studentId)
         })
     }
 
@@ -47,4 +52,15 @@ class MainActivity : AppCompatActivity() {
             Log.d(tag, "fee amount is: ${it[0].admission} ")
         })
     }
+
+    private fun getAnnualFee(studentId: String) {
+        viewModelMain.getAnnualFee(studentId)?.observe(this, Observer {
+            if (it[0].id == null) {
+                Log.d(tag, "Annual Fee not paid for student ID $studentId:")
+            } else {
+                Log.d(tag, " Annual fee paid already for student id $studentId:")
+            }
+        })
+    }
+
 }

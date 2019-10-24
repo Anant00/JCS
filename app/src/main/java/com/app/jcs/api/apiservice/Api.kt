@@ -36,4 +36,10 @@ interface Api {
     fun getFees(
         @Field("class_id") classId: String
     ): Single<List<Fees>>
+
+    @FormUrlEncoded
+    @POST("includes/getAnnualFee.php")
+    fun getAnnualFee(
+        @Field("student_id") studentId: String
+    ): Single<List<AdmissionFee>>
 }
