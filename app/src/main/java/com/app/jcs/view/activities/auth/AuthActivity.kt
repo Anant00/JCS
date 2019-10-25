@@ -56,7 +56,7 @@ class AuthActivity : AppCompatActivity() {
 
     private fun navigateToMainActivity(parentLogin: ParentLogin) {
         startActivity(Intent(this, MainActivity::class.java).putExtra("data", parentLogin))
-        finish()
+        overridePendingTransition(0, 0)
     }
 
 }

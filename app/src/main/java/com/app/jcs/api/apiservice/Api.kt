@@ -1,9 +1,6 @@
 package com.app.jcs.api.apiservice
 
-import com.app.jcs.api.apimodels.AdmissionFee
-import com.app.jcs.api.apimodels.Fees
-import com.app.jcs.api.apimodels.ParentLogin
-import com.app.jcs.api.apimodels.StudentDetail
+import com.app.jcs.api.apimodels.*
 import io.reactivex.Flowable
 import io.reactivex.Single
 import retrofit2.http.Field
@@ -42,4 +39,10 @@ interface Api {
     fun getAnnualFee(
         @Field("student_id") studentId: String
     ): Single<List<AdmissionFee>>
+
+    @FormUrlEncoded
+    @POST("includes/getTransportFees.php")
+    fun getTransportFee(
+        @Field("student_id") studentId: String
+    ): Single<List<TransportFees>>
 }
