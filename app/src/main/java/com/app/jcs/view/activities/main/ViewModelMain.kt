@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.app.jcs.api.apimodels.AdmissionFee
 import com.app.jcs.api.apimodels.Fees
 import com.app.jcs.api.apimodels.StudentDetail
+import com.app.jcs.api.apimodels.TransportFees
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
@@ -21,6 +22,7 @@ class ViewModelMain(
     private var admissionFee: MutableLiveData<List<AdmissionFee>>? = null
     private var feesList: MutableLiveData<List<Fees>>? = null
     private var annualFeesList: MutableLiveData<List<AdmissionFee>>? = null
+    private var transportFee: MutableLiveData<List<TransportFees>>? = null
 
 
 
@@ -66,6 +68,19 @@ class ViewModelMain(
         )
     }
 
+    private fun getTransportFeeByStudentId(studentId: String) {
+        disposable.add(
+            mainRepo.getTransportFeeByStudentId(studentId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    transportFee?.value = it
+                    Log.d(tag, "returned value :${it[0].userId} ")
+                }, {
+                    Log.d(tag, "transport error is:${it.localizedMessage} ")
+                })
+        )
+    }
+
     fun getStudentDetail(parentId: String): LiveData<List<StudentDetail>>? {
         if (studentDetail == null) {
             studentDetail = MutableLiveData()
@@ -97,5 +112,15 @@ class ViewModelMain(
             getAnnualFeeByStudentId(studentId)
         }
         return annualFeesList
+    }
+
+    fun getTransportFee(studentId: String): LiveData<List<TransportFees>>? {
+        if (transportFee == null) {
+            transportFee = MutableLiveData()
+            getTransportFeeByStudentId(studentId)
+        }
+        return transportFee
+
+
     }
 }

@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getFeeByClassId(classId: String) {
         viewModelMain.getFee(classId)?.observe(this, Observer {
-            Log.d(tag, "fee amount is: ${it[0].admission} ")
+            Log.d(tag, "fee amount is: ${it[0].feePerMonth} ")
             setData(it)
 
         })
