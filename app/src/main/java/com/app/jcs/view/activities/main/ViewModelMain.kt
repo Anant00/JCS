@@ -24,8 +24,6 @@ class ViewModelMain(
     private var annualFeesList: MutableLiveData<List<AdmissionFee>>? = null
     private var transportFee: MutableLiveData<List<TransportFees>>? = null
 
-
-
     private fun getStudentDetailByParentId(parentId: String) {
         disposable.add(
             mainRepo.getStudentDetailByParentId(parentId)
@@ -120,7 +118,5 @@ class ViewModelMain(
             getTransportFeeByStudentId(studentId)
         }
         return transportFee
-
-
     }
 }

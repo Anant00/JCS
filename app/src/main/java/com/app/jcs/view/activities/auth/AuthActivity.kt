@@ -58,5 +58,4 @@ class AuthActivity : AppCompatActivity() {
         startActivity(Intent(this, MainActivity::class.java).putExtra("data", parentLogin))
         overridePendingTransition(0, 0)
     }
-
 }

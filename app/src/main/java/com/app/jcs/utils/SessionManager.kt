@@ -24,5 +24,4 @@ class SessionManager {
     fun getAuthUser(): MediatorLiveData<AuthResource<ParentLogin>> {
         return cachedUser
     }
-
 }

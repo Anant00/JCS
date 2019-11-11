@@ -5,7 +5,6 @@ import com.app.jcs.api.apimodels.ParentLogin
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class IntentUtilParent(
+data class IntentUtil(
     var parentLogin: ParentLogin
 ) : Parcelable
-

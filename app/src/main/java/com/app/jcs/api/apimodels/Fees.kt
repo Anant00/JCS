@@ -14,5 +14,4 @@ class Fees {
     var admission: String? = null
     @Json(name = "annual")
     var annual: String? = null
-
 }

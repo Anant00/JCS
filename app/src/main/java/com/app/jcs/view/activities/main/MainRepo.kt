@@ -14,7 +14,6 @@ class MainRepo(private val api: Api) {
         return api.getStudentDetail(parentId)
             .toObservable()
             .subscribeOn(Schedulers.io())
-
     }
 
     fun getAdmissionFeeByStudentId(studentId: String): Observable<List<AdmissionFee>> {
@@ -40,5 +39,4 @@ class MainRepo(private val api: Api) {
             .toObservable()
             .subscribeOn(Schedulers.io())
     }
-
 }

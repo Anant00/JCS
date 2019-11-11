@@ -40,5 +40,4 @@ class AuthResource<T>(val status: AuthStatus, val data: T?, val message: String?
             )
         }
     }
-
 }
