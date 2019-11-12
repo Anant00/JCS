@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getStudentDetailByParentId(parentId: String) {
         viewModelMain.getStudentDetail(parentId)?.observe(this, Observer {
-            studentId = "3"
+            studentId = it[0].id.toString()
             classId = it[0].classId.toString()
             feePaidUpToDate = it[0].feePaidUpToDate.toString()
             Log.d(tag, "fee paid upto date:$feePaidUpToDate")

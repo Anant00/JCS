@@ -5,10 +5,9 @@ import androidx.lifecycle.LiveDataReactiveStreams
 import com.app.jcs.api.apimodels.ParentLogin
 import com.app.jcs.api.apiservice.Api
 import com.app.jcs.utils.SessionManager
-import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 
-class AuthRepo(var api: Api, var sessionManager: SessionManager) {
+class AuthRepo(var api: Api, private var sessionManager: SessionManager) {
     private val tag by lazy {
         javaClass.simpleName
     }
@@ -20,17 +19,18 @@ class AuthRepo(var api: Api, var sessionManager: SessionManager) {
     private fun queryUserId(userId: String, password: String): LiveData<AuthResource<ParentLogin>> {
         return LiveDataReactiveStreams.fromPublisher(
             api.login(userId, password)
-                .onErrorReturn
-                {
+                .onErrorReturn {
                     val errorUser = ParentLogin()
                     errorUser.id = -1
                     errorUser
                 }
-                .map(Function<ParentLogin, AuthResource<ParentLogin>> { user ->
-                    if (user.id == -1) {
-                        AuthResource.error("Could not authenticate", null)
-                    } else AuthResource.authenticated(user)
-                })
+                .map {
+                    if (it.id == -1 || it.id == null) {
+                        AuthResource.error("Could not authenticate", it)
+                    } else {
+                        AuthResource.authenticated("Login Successful", it)
+                    }
+                }
                 .subscribeOn(Schedulers.io())
         )
     }

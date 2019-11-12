@@ -8,11 +8,11 @@ class AuthResource<T>(val status: AuthStatus, val data: T?, val message: String?
 
     companion object {
 
-        fun <T> authenticated(data: T?): AuthResource<T> {
+        fun <T> authenticated(message: String?, data: T?): AuthResource<T> {
             return AuthResource(
                 AuthStatus.AUTHENTICATED,
                 data,
-                null
+                message
             )
         }
 
