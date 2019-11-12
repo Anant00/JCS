@@ -1,4 +1,4 @@
-package com.app.jcs.viewmodels
+package com.app.jcs.viewmodels.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -11,10 +11,6 @@ class AuthViewModel(
     private val sessionManager: SessionManager,
     private val authRepo: AuthRepo
 ) : ViewModel() {
-
-    private val tag by lazy {
-        javaClass.simpleName
-    }
 
     fun loginUser(username: String, password: String) {
         authRepo.loginUser(username, password)

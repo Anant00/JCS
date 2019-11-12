@@ -10,6 +10,7 @@ import com.app.jcs.R
 import com.app.jcs.api.apimodels.Fees
 import com.app.jcs.api.apimodels.ParentLogin
 import com.app.jcs.utils.DateExtractUtils
+import com.app.jcs.viewmodels.main.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var feePaidUpToDate: String
     private var admissionFeePaid: MutableLiveData<Boolean> = MutableLiveData(false)
     private var annualFeePaid: MutableLiveData<Boolean> = MutableLiveData(false)
-    private val viewModelMain: ViewModelMain by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getStudentDetailByParentId(parentId: String) {
-        viewModelMain.getStudentDetail(parentId)?.observe(this, Observer {
+        mainViewModel.getStudentDetail(parentId)?.observe(this, Observer {
             studentId = it[0].id.toString()
             classId = it[0].classId.toString()
             feePaidUpToDate = it[0].feePaidUpToDate.toString()
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAdmissionFeeByStudentId(studentId: String) {
-        viewModelMain.getAdmissionFee(studentId)?.observe(this, Observer {
+        mainViewModel.getAdmissionFee(studentId)?.observe(this, Observer {
             if (it[0].id == null) {
                 Log.d(tag, "Admission Fee not paid for student ID $studentId:")
             } else {
@@ -61,14 +62,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getFeeByClassId(classId: String) {
-        viewModelMain.getFee(classId)?.observe(this, Observer {
+        mainViewModel.getFee(classId)?.observe(this, Observer {
             Log.d(tag, "fee amount is: ${it[0].feePerMonth} ")
             setData(it)
         })
     }
 
     private fun getAnnualFee(studentId: String) {
-        viewModelMain.getAnnualFee(studentId)?.observe(this, Observer {
+        mainViewModel.getAnnualFee(studentId)?.observe(this, Observer {
             if (it[0].id == null) {
                 Log.d(tag, "Annual Fee not paid for student ID $studentId:")
             } else {
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getTransportFeeByStudentId(studentId: String) {
-        viewModelMain.getTransportFee(studentId)?.observe(this, Observer {
+        mainViewModel.getTransportFee(studentId)?.observe(this, Observer {
             Log.d(tag, "transport fee: ${it[0].userId} ")
             if (it[0].userId != null) {
                 Log.d(tag, "transport fee: ${it[0].userId} ")

@@ -21,10 +21,10 @@ class AuthRepo(private var api: Api, private var sessionManager: SessionManager)
                     errorUser
                 }
                 .map {
-                    if (it.id == -1 || it.id == null) {
-                        AuthResource.error("Could not authenticate", it)
-                    } else {
-                        AuthResource.authenticated("Login Successful", it)
+                    when {
+                        it.id == -1 -> AuthResource.error("Error", it)
+                        it.id == null -> AuthResource.error("Invalid username or password", it)
+                        else -> AuthResource.authenticated("Login Successful", it)
                     }
                 }
                 .subscribeOn(Schedulers.io())

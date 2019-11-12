@@ -1,4 +1,4 @@
-package com.app.jcs.view.activities.main
+package com.app.jcs.viewmodels.main
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,10 +8,11 @@ import com.app.jcs.api.apimodels.AdmissionFee
 import com.app.jcs.api.apimodels.Fees
 import com.app.jcs.api.apimodels.StudentDetail
 import com.app.jcs.api.apimodels.TransportFees
+import com.app.jcs.view.activities.main.MainRepo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
-class ViewModelMain(
+class MainViewModel(
     private val mainRepo: MainRepo,
     private val disposable: CompositeDisposable
 ) : ViewModel() {

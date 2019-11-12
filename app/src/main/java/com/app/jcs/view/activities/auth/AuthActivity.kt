@@ -3,13 +3,15 @@ package com.app.jcs.view.activities.auth
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.app.jcs.R
 import com.app.jcs.api.apimodels.ParentLogin
 import com.app.jcs.view.activities.main.MainActivity
-import com.app.jcs.viewmodels.AuthViewModel
+import com.app.jcs.viewmodels.auth.AuthViewModel
 import kotlinx.android.synthetic.main.activity_auth.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,14 +42,19 @@ class AuthActivity : AppCompatActivity() {
         authViewModel.observeAuthState().observe(this, Observer {
             when (it?.status) {
                 AuthResource.AuthStatus.LOADING -> {
-                    Log.d(tag, "Loading")
+                    progressBar.visibility = VISIBLE
+                    btnLogin.isEnabled = false
                 }
                 AuthResource.AuthStatus.AUTHENTICATED -> {
                     it.data?.let { data ->
                         navigateToMainActivity(data)
                     }
                 }
-                AuthResource.AuthStatus.ERROR -> Log.d(tag, "error: ${it.message}")
+                AuthResource.AuthStatus.ERROR -> {
+                    progressBar.visibility = INVISIBLE
+                    btnLogin.isEnabled = true
+                    Log.d(tag, "error: ${it.message}")
+                }
                 AuthResource.AuthStatus.NOT_AUTHENTICATED -> Log.d(tag, "failed: User logged out")
                 null -> Log.d(tag, "null")
             }
@@ -57,5 +64,7 @@ class AuthActivity : AppCompatActivity() {
     private fun navigateToMainActivity(parentLogin: ParentLogin) {
         startActivity(Intent(this, MainActivity::class.java).putExtra("data", parentLogin))
         overridePendingTransition(0, 0)
+        progressBar.visibility = INVISIBLE
+        btnLogin.isEnabled = true
     }
 }

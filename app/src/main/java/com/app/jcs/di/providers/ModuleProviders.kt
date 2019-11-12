@@ -4,8 +4,8 @@ import com.app.jcs.api.apiservice.Api
 import com.app.jcs.utils.SessionManager
 import com.app.jcs.view.activities.auth.AuthRepo
 import com.app.jcs.view.activities.main.MainRepo
-import com.app.jcs.view.activities.main.ViewModelMain
-import com.app.jcs.viewmodels.AuthViewModel
+import com.app.jcs.viewmodels.auth.AuthViewModel
+import com.app.jcs.viewmodels.main.MainViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 object ModuleProviders {
@@ -32,8 +32,8 @@ object ModuleProviders {
     fun provideMainViewModel(
         mainRepo: MainRepo,
         disposable: CompositeDisposable
-    ): ViewModelMain {
-        return ViewModelMain(mainRepo, disposable)
+    ): MainViewModel {
+        return MainViewModel(mainRepo, disposable)
     }
 
     fun provideMainRepo(api: Api): MainRepo {
