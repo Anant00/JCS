@@ -1,6 +1,10 @@
 package com.app.jcs.api.apiservice
 
-import com.app.jcs.api.apimodels.*
+import com.app.jcs.api.apimodels.AdmissionFee
+import com.app.jcs.api.apimodels.Fees
+import com.app.jcs.api.apimodels.ParentLogin
+import com.app.jcs.api.apimodels.StudentDetail
+import com.app.jcs.api.apimodels.TransportFees
 import io.reactivex.Flowable
 import io.reactivex.Single
 import retrofit2.http.Field

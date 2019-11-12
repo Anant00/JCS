@@ -7,11 +7,7 @@ import com.app.jcs.api.apiservice.Api
 import com.app.jcs.utils.SessionManager
 import io.reactivex.schedulers.Schedulers
 
-class AuthRepo(var api: Api, private var sessionManager: SessionManager) {
-    private val tag by lazy {
-        javaClass.simpleName
-    }
-
+class AuthRepo(private var api: Api, private var sessionManager: SessionManager) {
     fun loginUser(userId: String, password: String) {
         sessionManager.authenticateWithId(queryUserId(userId, password))
     }
