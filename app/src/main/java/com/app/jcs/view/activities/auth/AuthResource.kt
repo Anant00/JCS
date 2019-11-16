@@ -16,7 +16,7 @@ class AuthResource<T>(val status: AuthStatus, val data: T?, val message: String?
             )
         }
 
-        fun <T> error(msg: String, data: T?): AuthResource<T> {
+        fun <T> error(msg: String?, data: T?): AuthResource<T> {
             return AuthResource(
                 AuthStatus.ERROR,
                 data,

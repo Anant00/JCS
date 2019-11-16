@@ -15,19 +15,19 @@ class AuthRepo(private var api: Api, private var sessionManager: SessionManager)
     private fun queryUserId(userId: String, password: String): LiveData<AuthResource<ParentLogin>> {
         return LiveDataReactiveStreams.fromPublisher(
             api.login(userId, password)
-                .onErrorReturn {
-                    val errorUser = ParentLogin()
-                    errorUser.id = -1
-                    errorUser
-                }
-                .map {
-                    when {
-                        it.id == -1 -> AuthResource.error("Error", it)
-                        it.id == null -> AuthResource.error("Invalid username or password", it)
-                        else -> AuthResource.authenticated("Login Successful", it)
-                    }
-                }
                 .subscribeOn(Schedulers.io())
+                .map {
+                    if (it.username != null) AuthResource.authenticated(
+                        "Logged in successfully",
+                        it
+                    )
+                    else AuthResource.error(
+                        "Failed to loginUser in, please check in your username and password",
+                        it
+                    )
+                }
+                .doOnError { AuthResource.error(it.localizedMessage, it) }
+                .onErrorReturn { AuthResource.error(it.localizedMessage, null) }
         )
     }
 }

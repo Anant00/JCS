@@ -8,15 +8,17 @@ import com.app.jcs.view.activities.auth.AuthRepo
 import com.app.jcs.view.activities.auth.AuthResource
 
 class AuthViewModel(
-    private val sessionManager: SessionManager,
+    sessionManager: SessionManager,
     private val authRepo: AuthRepo
 ) : ViewModel() {
+
+    private val _authStatus: LiveData<AuthResource<ParentLogin>> = sessionManager.getAuthUser()
 
     fun loginUser(username: String, password: String) {
         authRepo.loginUser(username, password)
     }
 
     fun observeAuthState(): LiveData<AuthResource<ParentLogin>> {
-        return sessionManager.getAuthUser()
+        return _authStatus
     }
 }

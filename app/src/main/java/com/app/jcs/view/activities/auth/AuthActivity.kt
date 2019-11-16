@@ -16,9 +16,7 @@ import kotlinx.android.synthetic.main.activity_auth.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AuthActivity : AppCompatActivity() {
-    private val tag by lazy {
-        javaClass.simpleName
-    }
+
     private val authViewModel: AuthViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,10 +51,10 @@ class AuthActivity : AppCompatActivity() {
                 AuthResource.AuthStatus.ERROR -> {
                     progressBar.visibility = INVISIBLE
                     btnLogin.isEnabled = true
-                    Log.d(tag, "error: ${it.message}")
+                    Log.d(TAG, "error: ${it.message}")
                 }
-                AuthResource.AuthStatus.NOT_AUTHENTICATED -> Log.d(tag, "failed: User logged out")
-                null -> Log.d(tag, "null")
+                AuthResource.AuthStatus.NOT_AUTHENTICATED -> Log.d(TAG, "failed: User logged out")
+                null -> Log.d(TAG, "null")
             }
         })
     }
@@ -66,5 +64,11 @@ class AuthActivity : AppCompatActivity() {
         overridePendingTransition(0, 0)
         progressBar.visibility = INVISIBLE
         btnLogin.isEnabled = true
+    }
+
+    companion object {
+        private val TAG by lazy {
+            AuthActivity::class.java.simpleName
+        }
     }
 }
